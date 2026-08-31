@@ -1,0 +1,32 @@
+{
+  "name": "pathfinder-ai-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PathFinder AI - Next-generation AI-powered career and learning pathway navigator",
+  "scripts": {
+    "dev": "concurrently -k -n \"FRONTEND,BACKEND,AI-SERVICE\" -c \"cyan.bold,green.bold,magenta.bold\" \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:ai\"",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:ai": "cd ai-service && ./venv/bin/uvicorn app.main:app --reload --reload-dir app --port 8000",
+    "db:seed": "cd ai-service && ./venv/bin/python scripts/seed_supabase.py",
+    "install:all": "npm install && npm --prefix frontend install && npm --prefix backend install && npm run install:ai",
+    "install:ai": "cd ai-service && (python3 -m venv venv 2>/dev/null || true) && ./venv/bin/pip install -r requirements.txt",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build",
+    "build": "npm run build:frontend && npm run build:backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "keywords": [
+    "ai",
+    "career-navigator",
+    "react",
+    "fastapi",
+    "express",
+    "typescript",
+    "supabase"
+  ],
+  "author": "",
+  "license": "MIT"
+}
