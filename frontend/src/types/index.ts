@@ -17,6 +17,9 @@ export interface Skill {
   description?: string;
   proficiency_level: number;
   initial_proficiency_level?: number;
+  target_benchmark?: number;
+  targetBenchmark?: number;
+  currentMastery?: number;
   verified: boolean;
   updated_at?: string;
 }
@@ -31,6 +34,8 @@ export interface Goal {
   status: 'active' | 'paused' | 'completed' | 'archived';
   current_step: number;
   notes?: string;
+  target_skills?: string[];
+  skillMatrix?: Skill[];
   created_at: string;
   updated_at: string;
   user_name?: string;

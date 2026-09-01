@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ExternalLink, Star, Clock, ChevronDown, ChevronUp, Award, MessageSquare } from 'lucide-react';
 import { Course } from '../types';
 import { CourseFeedbackModal } from './CourseFeedbackModal';
+import { getCourseUrl } from '../utils/courseLinks';
 
 interface CourseCardProps {
   course: Course;
@@ -19,7 +20,7 @@ const CourseCardComponent: React.FC<CourseCardProps> = ({ course, stepIndex }) =
   const title = course.title || 'Untitled course';
   const provider = course.provider || 'Unknown provider';
   const description = course.description || 'No course description available yet.';
-  const url = course.url || '#';
+  const url = getCourseUrl(course);
 
   // Match percentage calculation / formatting
   const matchPct = typeof course.match_percentage === 'number'
@@ -146,7 +147,6 @@ const CourseCardComponent: React.FC<CourseCardProps> = ({ course, stepIndex }) =
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-disabled={!course.url}
                 className="flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 hover:text-white transition-all text-xs font-semibold shadow-sm"
               >
                 <span>View Course</span>

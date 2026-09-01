@@ -25,6 +25,7 @@ import { CourseCard } from '../components/CourseCard';
 import { AssessmentModal } from '../components/AssessmentModal';
 import { CourseFeedbackWidget } from '../components/CourseFeedbackWidget';
 import { useToast } from '../context/ToastContext';
+import { getCourseUrl } from '../utils/courseLinks';
 
 const PHASES = ['Foundations', 'Core Backend', 'Advanced Topics', 'Capstone Project'];
 
@@ -627,7 +628,7 @@ export const LearningPathPage: React.FC = () => {
               </div>
 
               <a
-                href={selectedCourse.url}
+                href={getCourseUrl(selectedCourse)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-bold transition-all"

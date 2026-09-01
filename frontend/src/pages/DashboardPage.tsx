@@ -33,6 +33,7 @@ export const DashboardPage: React.FC = () => {
   const [assessments, setAssessments] = useState<Assessment[]>([]);
   const [stats, setStats] = useState<UserStats | null>(null);
   const [activeCourses, setActiveCourses] = useState<Course[]>([]);
+  const [activeTargetSkills, setActiveTargetSkills] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -48,6 +49,10 @@ export const DashboardPage: React.FC = () => {
         if (goalForProgress?.id) {
           const pathway = await goalsApi.getById(goalForProgress.id);
           setActiveCourses(pathway.recommendations || []);
+          setActiveTargetSkills(pathway.target_skills || []);
+        } else {
+          setActiveCourses([]);
+          setActiveTargetSkills([]);
         }
       } catch (error: any) {
         console.error('Failed to load dashboard:', error);
@@ -252,12 +257,11 @@ export const DashboardPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 4. Main Dashboard Grid: Skill analytics, goals, and milestones */}
+      {/* 4. Main Dashboard Grid: Skill analytics, goals, and assessments */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        {/* Left Column: Skill Matrix & Focus Priorities */}
-        <div className="space-y-6">
+        {/* Left Column: Skill Matrix */}
+        <div>
           <SkillRadarChart skills={skills} />
-          <SkillFocusWidget skills={skills} activeGoal={activeGoal} activeCourses={activeCourses} />
         </div>
 
         {/* Right Column: Active Goals & Assessments */}
@@ -274,7 +278,7 @@ export const DashboardPage: React.FC = () => {
               </Link>
             </div>
 
-            <div className="max-h-[520px] space-y-3 overflow-y-auto pr-2">
+            <div className="max-h-[380px] space-y-3 overflow-y-auto pr-2 custom-scrollbar">
               {goals.length === 0 ? (
                 <div className="p-6 text-center border border-dashed border-slate-300 rounded-xl dark:border-slate-800">
                   <Compass className="w-8 h-8 text-slate-600 mx-auto mb-2" />
@@ -335,7 +339,7 @@ export const DashboardPage: React.FC = () => {
               </h3>
             </div>
 
-            <div className="space-y-2.5">
+            <div className="max-h-[300px] space-y-2.5 overflow-y-auto pr-2 custom-scrollbar">
               {assessments.length === 0 ? (
                 <p className="text-xs text-slate-500 text-center py-4">No diagnostic tests taken yet.</p>
               ) : (
@@ -361,9 +365,19 @@ export const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="col-span-1 lg:col-span-2">
+        <section className="col-span-1 lg:col-span-2 w-full">
+          <SkillFocusWidget
+            skills={skills}
+            activeGoal={activeGoal}
+            activeCourses={activeCourses}
+            targetSkills={activeTargetSkills}
+            targetRole={activeGoal?.target_role || user?.target_role}
+          />
+        </section>
+
+        <section className="col-span-1 lg:col-span-2 w-full">
           <LearningMilestonesWidget activeGoal={activeGoal} activeCourses={activeCourses} stats={stats} />
-        </div>
+        </section>
       </div>
     </div>
   );
