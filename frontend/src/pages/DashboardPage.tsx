@@ -265,10 +265,10 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Right Column: Active Goals & Assessments */}
-        <div className="flex flex-col gap-6 h-full justify-between min-h-0 overflow-hidden">
+        <div className="flex flex-col gap-6 justify-between h-full">
           {/* Active Goals Card */}
-          <div className={`${dashboardCardClass} p-6 flex flex-col min-h-0`}>
-            <div className="flex items-center justify-between mb-4">
+          <div className={`${dashboardCardClass} p-6 h-[280px] flex flex-col`}>
+            <div className="flex items-center justify-between mb-4 flex-shrink-0">
               <h3 className={`text-base sm:text-lg font-bold ${headingClass} tracking-tight flex items-center space-x-2`}>
                 <Target className="w-4 h-4 text-cyan-400" />
                 <span>Career Roadmaps</span>
@@ -278,9 +278,9 @@ export const DashboardPage: React.FC = () => {
               </Link>
             </div>
 
-            <div className="max-h-[260px] overflow-y-auto pr-2 custom-scrollbar space-y-3">
+            <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar min-h-0 space-y-3">
               {goals.length === 0 ? (
-                <div className="p-6 text-center border border-dashed border-slate-300 rounded-xl dark:border-slate-800">
+                <div className="flex h-full flex-col items-center justify-center p-6 text-center border border-dashed border-slate-300 rounded-xl dark:border-slate-800">
                   <Compass className="w-8 h-8 text-slate-600 mx-auto mb-2" />
                   <p className="text-sm font-semibold text-slate-800 dark:text-slate-300">No Career Goals Synthesized Yet</p>
                   <p className="text-xs text-slate-500 mt-1">
@@ -331,17 +331,19 @@ export const DashboardPage: React.FC = () => {
           </div>
 
           {/* Diagnostic Assessments Card */}
-          <div className={`${dashboardCardClass} p-6 flex flex-col min-h-0`}>
-            <div className="flex items-center justify-between mb-4">
+          <div className={`${dashboardCardClass} p-6 h-[180px] flex flex-col`}>
+            <div className="flex items-center justify-between mb-4 flex-shrink-0">
               <h3 className={`text-base sm:text-lg font-bold ${headingClass} tracking-tight flex items-center space-x-2`}>
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span>Diagnostic Assessments</span>
               </h3>
             </div>
 
-            <div className="max-h-[200px] overflow-y-auto pr-2 custom-scrollbar space-y-2.5">
+            <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar min-h-0 space-y-2.5">
               {assessments.length === 0 ? (
-                <p className="text-xs text-slate-500 text-center py-4">No diagnostic tests taken yet.</p>
+                <div className="flex h-full items-center justify-center rounded-xl border border-dashed border-slate-300 text-center dark:border-slate-800">
+                  <p className="text-xs text-slate-500">No diagnostic tests taken yet.</p>
+                </div>
               ) : (
                 assessments.map((a) => (
                   <div
