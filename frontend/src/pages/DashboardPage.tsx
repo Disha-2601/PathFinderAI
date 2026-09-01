@@ -260,15 +260,15 @@ export const DashboardPage: React.FC = () => {
       {/* 4. Main Dashboard Grid: Skill analytics, goals, and assessments */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
         {/* Left Column: Skill Matrix */}
-        <div className="h-full min-h-0">
+        <div>
           <SkillRadarChart skills={skills} />
         </div>
 
         {/* Right Column: Active Goals & Assessments */}
-        <div className="flex flex-col gap-6 h-full justify-between min-h-0">
+        <div className="flex flex-col gap-6 h-full justify-between min-h-0 overflow-hidden">
           {/* Active Goals Card */}
-          <div className={`${dashboardCardClass} p-6 flex-1 min-h-0 flex flex-col`}>
-            <div className="flex items-center justify-between mb-4 flex-shrink-0">
+          <div className={`${dashboardCardClass} p-6 flex flex-col min-h-0`}>
+            <div className="flex items-center justify-between mb-4">
               <h3 className={`text-base sm:text-lg font-bold ${headingClass} tracking-tight flex items-center space-x-2`}>
                 <Target className="w-4 h-4 text-cyan-400" />
                 <span>Career Roadmaps</span>
@@ -278,7 +278,7 @@ export const DashboardPage: React.FC = () => {
               </Link>
             </div>
 
-            <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar min-h-0 space-y-3">
+            <div className="max-h-[260px] overflow-y-auto pr-2 custom-scrollbar space-y-3">
               {goals.length === 0 ? (
                 <div className="p-6 text-center border border-dashed border-slate-300 rounded-xl dark:border-slate-800">
                   <Compass className="w-8 h-8 text-slate-600 mx-auto mb-2" />
@@ -331,15 +331,15 @@ export const DashboardPage: React.FC = () => {
           </div>
 
           {/* Diagnostic Assessments Card */}
-          <div className={`${dashboardCardClass} p-6 flex-1 min-h-0 flex flex-col`}>
-            <div className="flex items-center justify-between mb-4 flex-shrink-0">
+          <div className={`${dashboardCardClass} p-6 flex flex-col min-h-0`}>
+            <div className="flex items-center justify-between mb-4">
               <h3 className={`text-base sm:text-lg font-bold ${headingClass} tracking-tight flex items-center space-x-2`}>
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span>Diagnostic Assessments</span>
               </h3>
             </div>
 
-            <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar min-h-0 space-y-2.5">
+            <div className="max-h-[200px] overflow-y-auto pr-2 custom-scrollbar space-y-2.5">
               {assessments.length === 0 ? (
                 <p className="text-xs text-slate-500 text-center py-4">No diagnostic tests taken yet.</p>
               ) : (
